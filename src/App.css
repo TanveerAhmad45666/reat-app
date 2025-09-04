@@ -52,6 +52,10 @@ body {
 
 
 .text-form-container{
-
   margin: 50px auto;
+}
+
+.faq-title{
+  text-align: center;
+  margin: 20px;
 }
