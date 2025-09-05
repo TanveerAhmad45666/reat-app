@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
-
+// for routing add this 
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 
 import Messagess from "./Message";
@@ -14,10 +15,11 @@ import Alert from "./components/Alert";
 function App() {
   const [mode, setMode] = useState("light");
   const [modeText, setModeText] = useState("Enable Dard Mode");
-  const [alert, setAlert] = useState(null);
+  type AlertType = { msg: string; type: string } | null;
+  const [alert, setAlert] = useState<AlertType>(null);
 
 
-  const showAlert = (message, type) =>{
+  const showAlert = (message: string, type: string) =>{
     setAlert({
         msg: message,
         type: type
@@ -46,19 +48,33 @@ function App() {
   }
   return (
     <div>
-      <Navbar title="TextUtils" aboutText="About Us" mode={mode} toggleMode={toggleMode} modeText={modeText}/>
-      {/* <Navbar /> */}
-      {/* <Alert alert="This is alert"/> */}
-      <Alert alert={alert}/>
-      <section className="container text-form-container">
-        <TextForm showAlert={showAlert} formlabel="Please Enter Your" mode={mode}/>
-      </section>
-      <section className ="container about-container">
-        {/* <About title ="FAQS" /> */}
-      </section>
+      <Router>
+        <Navbar title="TextUtils" aboutText="About Us" mode={mode} toggleMode={toggleMode} modeText={modeText}/>
+        {/* <Navbar /> */}
+        {/* <Alert alert="This is alert"/> */}
+        <Alert alert={alert}/>
+       <Routes>
+    
+          <Route path="/" element={ <section className="container text-form-container">
+                <TextForm showAlert={showAlert} formlabel="Please Enter Your" mode={mode} />
+              </section>
+            }
+          />
+         
+          <Route
+            path="/about"
+            element={
+              <section className="container about-container">
+                <About title="FAQS" />
+              </section>
+            }
+          />
+          {/* OR */}  
+          {/* <Route path="/about" element={<About mode={mode} />} /> */}
 
-
-      {/* <Messagess /> */}
+        </Routes>
+        {/* <Messagess /> */}
+      </Router>  
     </div>
   );
 }
