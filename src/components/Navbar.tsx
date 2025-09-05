@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function Navbar(props) {
     return (
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <nav className={`navbar navbar-expand-lg bg-${props.mode} navbar-${props.mode}`}>
             <div className="container-fluid">
                 <a className="navbar-brand" href="#">{props.title}</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,6 +18,17 @@ function Navbar(props) {
                     <a className="nav-link" href="#">{props.aboutText}</a>
                     </li>
                 </ul>
+                <div className={`form-check form-switch text-${props.mode==="light"?"dark":"light"}`}>
+                    <input className="form-check-input" type="checkbox" onClick={props.toggleMode} role="switch" id="switchCheckDefault" />
+                    <label className="form-check-label enbal-btn" htmlFor="switchCheckDefault">{props.modeText}</label>
+                </div>
+                <div className="colorpickers">
+                    <div className="d-inline-block bg-dark rounded border me-2" style={{ width: "30px", height: "30px" }}></div>
+                    <div className="d-inline-block bg-danger rounded border me-2" style={{ width: "30px", height: "30px" }}></div>
+                    <div className="d-inline-block bg-primary rounded border me-2" style={{ width: "30px", height: "30px" }}></div>
+
+                </div>
+
                 <form className="d-flex" role="search">
                     <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
                     <button className="btn btn-outline-success" type="submit">Search</button>

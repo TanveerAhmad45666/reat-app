@@ -59,3 +59,10 @@ body {
   text-align: center;
   margin: 20px;
 }
+
+.enbal-btn{
+  margin-right: 10px;
+}
+.alert.alert-success.alert-dismissible.fade.show strong {
+	text-transform: capitalize;
+}

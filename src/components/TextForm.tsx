@@ -11,6 +11,7 @@ function TextForm(props) {
         console.log("Uppercase was clicked " + text);
         let newText = text.toUpperCase();
         setText(newText);
+        props.showAlert("Text Transfer to Uper Case", "success");
     }
     // Clear Text Area function
     const handleClClick = () => {
@@ -55,7 +56,7 @@ function TextForm(props) {
     return (
         <>
             <div className="mb-3">
-                <label htmlFor="myBox" className="form-label">{props.formlabel}</label>
+                <label htmlFor="myBox" className={`form-label text-${props.mode==="light"?"dark":"light"}`}>{props.formlabel}</label>
                 <textarea className="form-control" id="myBox" rows="8" value={text} onChange={handleOnChange} />
             </div>
         
@@ -69,13 +70,13 @@ function TextForm(props) {
 
             
 
-            <div className='text-summary my-3'>
+            <div className='text-summary my-3' style={{color: props.mode==="light"?"black":"white"}}>
                 <h2>Your text summary</h2>
                 <p>{text.trim() === "" ? 0 : text.trim().split(/\s+/).length} words and {text.length} characters</p>
                 <p>{ 0.008 * text.split(" ").length } Minutes Read</p>
                 <p className='email'>{foundEmails}</p>
                 <h2>Preview</h2>
-                <p>{text}</p>
+                <p>{text.length>0?text :"Please Enter Some Text in Textarea" }</p>
             </div>
         </>
     )
